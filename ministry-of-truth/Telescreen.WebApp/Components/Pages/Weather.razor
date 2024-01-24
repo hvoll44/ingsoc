@@ -46,9 +46,9 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        var accessToken = TokenStorage.GetAccessToken(HttpContext.User.Identity?.Name);
+        var accessToken = TokenStorage.GetAccessToken(HttpContext.User);
 
-        var client = new HttpClient();
+        using var client = new HttpClient();
 
         client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
 

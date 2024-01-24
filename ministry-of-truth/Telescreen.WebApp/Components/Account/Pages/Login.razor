@@ -93,7 +93,7 @@
         var result = await SignInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
         if (result.Succeeded)
         {
-            await TokenStorage.SetAccessTokenAsync(Input.Email, Input.Password);
+            await TokenStorage.CreateAccessTokenAsync(Input.Email, Input.Password);
 
             Logger.LogInformation("User logged in.");
             RedirectManager.RedirectTo(ReturnUrl);

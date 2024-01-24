@@ -1,10 +1,11 @@
 ﻿using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
 
 namespace Telescreen.WebApp
 {
     public class TokenStorage
     {
-        public async Task SetAccessTokenAsync(string email, string password)
+        public async Task CreateAccessTokenAsync(string email, string password)
         {
             var client = new HttpClient();
             var loginResponse = await client.PostAsJsonAsync<MyLoginInput>("https://localhost:7261/login",
@@ -23,11 +24,11 @@ namespace Telescreen.WebApp
             AccessTokenLookup.Add(email, accessToken ?? string.Empty);
         }
 
-        public string GetAccessToken(string? email)
+        public string GetAccessToken(ClaimsPrincipal user)
         {
-            if (email.IsNullOrEmpty()) return string.Empty;
+            if (user.Identity?.Name == null) return string.Empty;
 
-            return AccessTokenLookup.TryGetValue(email!, out string? value) ? value : string.Empty;
+            return AccessTokenLookup.TryGetValue(user.Identity?.Name!, out string? value) ? value : string.Empty;
         }
 
         private Dictionary<string, string> AccessTokenLookup { get; set; } = [];
@@ -40,7 +41,7 @@ namespace Telescreen.WebApp
             public string? TwoFactorRecoveryCode { get; set; }
         }
 
-        public class AccessTokenResponse
+        private class AccessTokenResponse
         {
             public string? TokenType { get; set; }
             public string? AccessToken { get; set; }
