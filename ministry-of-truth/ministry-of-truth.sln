@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Telescreen.WebApp", "Telesc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InnerPartySlogans.WebApi", "InnerPartySlogans.WebApi\InnerPartySlogans.WebApi.csproj", "{70592B10-4C4E-4B4C-82A7-11A4359F0EBD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Newspeak.Models", "Newspeak.Models\Newspeak.Models.csproj", "{6D5DB6FA-EF69-4DB1-9D0D-63672C538BB8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{70592B10-4C4E-4B4C-82A7-11A4359F0EBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{70592B10-4C4E-4B4C-82A7-11A4359F0EBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{70592B10-4C4E-4B4C-82A7-11A4359F0EBD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D5DB6FA-EF69-4DB1-9D0D-63672C538BB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D5DB6FA-EF69-4DB1-9D0D-63672C538BB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D5DB6FA-EF69-4DB1-9D0D-63672C538BB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D5DB6FA-EF69-4DB1-9D0D-63672C538BB8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
