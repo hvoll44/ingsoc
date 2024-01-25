@@ -23,8 +23,12 @@ builder.Services.AddSwaggerGen(options =>
     options.OperationFilter<SecurityRequirementsOperationFilter>();
 });
 
-builder.Services.AddDbContext<SlogansContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DataConnection")));
+builder.Services.AddDbContextFactory<SlogansContext>((provider, options) =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DataConnection"));
+});
+
+builder.Services.AddSqlServer<SlogansContext>(builder.Configuration.GetConnectionString("DataConnection"));
 
 builder.Services.AddDbContext<IdentityContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
