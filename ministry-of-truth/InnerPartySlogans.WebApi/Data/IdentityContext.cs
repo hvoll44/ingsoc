@@ -3,11 +3,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace InnerPartySlogans.WebApi.Data
 {
-    public class DataContext : IdentityDbContext
+    public class IdentityContext : IdentityDbContext
     {
-        public DataContext(DbContextOptions<DataContext> options) : base(options)
+        public IdentityContext(DbContextOptions<IdentityContext> options) : base(options)
         {
-
         }
+
     }
 }
