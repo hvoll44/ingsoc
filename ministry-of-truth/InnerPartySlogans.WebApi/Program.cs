@@ -23,18 +23,18 @@ builder.Services.AddSwaggerGen(options =>
     options.OperationFilter<SecurityRequirementsOperationFilter>();
 });
 
-builder.Services.AddDbContextFactory<SlogansContext>((provider, options) =>
-{
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DataConnection"));
-});
-
-builder.Services.AddSqlServer<SlogansContext>(builder.Configuration.GetConnectionString("DataConnection"));
-
 builder.Services.AddDbContext<IdentityContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddIdentityApiEndpoints<IdentityUser>()
     .AddEntityFrameworkStores<IdentityContext>();
+
+builder.Services.AddDbContextFactory<PartySlogansContext>((provider, options) =>
+{
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DataConnection"));
+});
+
+builder.Services.AddSqlServer<PartySlogansContext>(builder.Configuration.GetConnectionString("DataConnection"));
 
 var app = builder.Build();
 
