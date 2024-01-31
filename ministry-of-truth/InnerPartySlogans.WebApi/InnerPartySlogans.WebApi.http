@@ -1,6 +1,0 @@
-@InnerPartySlogans.WebApi_HostAddress = http://localhost:5186
-
-GET {{InnerPartySlogans.WebApi_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
