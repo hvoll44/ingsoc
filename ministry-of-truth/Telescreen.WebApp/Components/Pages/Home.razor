@@ -8,7 +8,7 @@
     <p>Hello @context.User.Identity?.Name</p>
 </AuthorizeView>
 
-<h2>@DailySlogan</h2>
+@* <h2>@DailySlogan</h2> *@
 
 @code {
     [CascadingParameter]
@@ -19,6 +19,6 @@
     protected override async Task OnInitializedAsync()
     {
         using var client = new HttpClient();
-        DailySlogan = await client.GetStringAsync("https://localhost:7261/Slogans") ?? string.Empty;
+        //DailySlogan = await client.GetStringAsync("https://localhost:7261/Slogans") ?? string.Empty;
     }
 }

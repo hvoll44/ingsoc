@@ -2,9 +2,9 @@
 
 namespace InnerPartySlogans.WebApi.Data
 {
-    public class SlogansContext : DbContext
+    public class PartySlogansContext : DbContext
     {
-        public SlogansContext(DbContextOptions<SlogansContext> options) : base(options)
+        public PartySlogansContext(DbContextOptions<PartySlogansContext> options) : base(options)
         {
         }
 

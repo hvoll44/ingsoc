@@ -9,9 +9,9 @@ namespace InnerPartySlogans.WebApi.Controllers
     [Route("[controller]")]
     public class SlogansController : ControllerBase
     {
-        private readonly IDbContextFactory<SlogansContext> _db;
+        private readonly IDbContextFactory<PartySlogansContext> _db;
 
-        public SlogansController(IDbContextFactory<SlogansContext> db)
+        public SlogansController(IDbContextFactory<PartySlogansContext> db)
         {
             _db = db;
         }
@@ -25,6 +25,16 @@ namespace InnerPartySlogans.WebApi.Controllers
 
             return result.FirstOrDefault()?.Phrase ?? "No slogans found";
         }
+
+        //[HttpGet(Name = "GetSlogans")]
+        //public async Task<List<string>> GetSloganPhrases()
+        //{
+        //    using var context = _db.CreateDbContext();
+
+        //    var result = await context.Slogan.ToListAsync();
+
+        //    return result.Select(s => s.Phrase).ToList() ?? ["No slogans found"];
+        //}
 
         [HttpPost(Name = "AddSlogan")]
         public async Task<int> AddSlogan(Slogan slogan)
