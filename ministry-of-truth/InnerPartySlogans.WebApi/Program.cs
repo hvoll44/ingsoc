@@ -34,7 +34,6 @@ builder.Services.AddDbContextFactory<PartySlogansContext>((provider, options) =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DataConnection"));
 });
 
-builder.Services.AddSqlServer<PartySlogansContext>(builder.Configuration.GetConnectionString("DataConnection"));
 
 var app = builder.Build();
 

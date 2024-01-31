@@ -8,7 +8,7 @@
     <p>Hello @context.User.Identity?.Name</p>
 </AuthorizeView>
 
-@* <h2>@DailySlogan</h2> *@
+<h2>@DailySlogan</h2>
 
 @code {
     [CascadingParameter]
@@ -19,6 +19,18 @@
     protected override async Task OnInitializedAsync()
     {
         using var client = new HttpClient();
-        //DailySlogan = await client.GetStringAsync("https://localhost:7261/Slogans") ?? string.Empty;
+        client.DefaultRequestHeaders.Add("Client-Data", HttpContext.User.Identity?.Name ?? "unknown user");
+
+        HttpResponseMessage response = await client.GetAsync("https://localhost:7261/Slogans/First");
+
+        if (response.IsSuccessStatusCode)
+        {
+            var responseData = await response.Content.ReadFromJsonAsync<CustomResponse>();
+
+            Console.WriteLine($"Mr. {responseData.ClientData} has read the slogan: {responseData.Message}");
+            DailySlogan = responseData.Message;
+        }
     }
+
+    private record CustomResponse(string ClientData, string Message);
 }

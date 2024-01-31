@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 namespace InnerPartySlogans.WebApi.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("[controller]/[Action]")]
     public class SlogansController : ControllerBase
     {
         private readonly IDbContextFactory<PartySlogansContext> _db;
@@ -16,25 +16,27 @@ namespace InnerPartySlogans.WebApi.Controllers
             _db = db;
         }
 
-        [HttpGet(Name = "GetSlogan")]
-        public async Task<string> GetSloganPhrase()
+        [HttpGet]
+        public IActionResult First()
+        {
+            string clientData = Request.Headers["Client-Data"];
+
+            using var context = _db.CreateDbContext();
+
+            var result = context.Slogan.ToListAsync().Result;
+
+            return Ok(new { ClientData = clientData, Message = result.FirstOrDefault()?.Phrase ?? "No slogans found" });
+        }
+
+        [HttpGet(Name = "GetSlogans")]
+        public async Task<List<string>> All()
         {
             using var context = _db.CreateDbContext();
 
             var result = await context.Slogan.ToListAsync();
 
-            return result.FirstOrDefault()?.Phrase ?? "No slogans found";
+            return result.Select(s => s.Phrase).ToList() ?? ["No slogans found"];
         }
-
-        //[HttpGet(Name = "GetSlogans")]
-        //public async Task<List<string>> GetSloganPhrases()
-        //{
-        //    using var context = _db.CreateDbContext();
-
-        //    var result = await context.Slogan.ToListAsync();
-
-        //    return result.Select(s => s.Phrase).ToList() ?? ["No slogans found"];
-        //}
 
         [HttpPost(Name = "AddSlogan")]
         public async Task<int> AddSlogan(Slogan slogan)
