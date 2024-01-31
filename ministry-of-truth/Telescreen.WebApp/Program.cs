@@ -6,8 +6,12 @@ using Telescreen.WebApp;
 using Telescreen.WebApp.Components;
 using Telescreen.WebApp.Components.Account;
 using Telescreen.WebApp.Data;
+using MudBlazor.Services;
+
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddMudServices();
 
 // Add services to the container.
 builder.Services.AddRazorComponents();
